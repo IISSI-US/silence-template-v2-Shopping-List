@@ -1,0 +1,35 @@
+{
+    "getUpurchasesByList":{
+        "route":"/lists/$listId/items/unpurchased",
+        "method":"GET",
+        "sql":"SELECT * FROM Items WHERE listId = $listId AND purchased = 0",
+        "description" : "Retrieves the items belonging to the specified list that haven't been purchased yet."
+    },
+
+    "getPurchasedByList":{
+        "route":"/lists/$listId/items/purchased",
+        "method":"GET",
+        "sql":"SELECT * FROM Items WHERE listId = $listId AND purchased = 1",
+        "description":"Retrieves the items belonging to the specified list that have been purchased"
+    },
+
+    "upQuantity":{
+        "route":"/items/$itemId/increase",
+        "method":"PUT",
+        "sql":"UPDATE Items SET quantity = quantity + 1 WHERE itemId = $itemId"
+    },
+
+    "downQuantity":{
+      "route": "/items/$itemId/decrease",
+      "method": "PUT",
+      "sql": "UPDATE Items SET quantity = quantity - 1 WHERE itemId = $itemId",
+      "description": "decreases the quantity of items in the shopping cart."
+    },
+
+    "purchase":{
+        "route": "/items/$itemId/purchase",
+        "method": "PUT",
+        "sql": "UPDATE Items SET purchased = 1 WHERE itemId = $itemId",
+        "description": "purchases an item by its corresponding id."
+      }
+}

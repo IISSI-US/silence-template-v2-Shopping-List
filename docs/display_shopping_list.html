@@ -1,0 +1,79 @@
+<!doctype HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="images/favicon.ico">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/libs/jquery-3.4.1.min.js"></script>
+    <script src="js/libs/popper.min.js"></script>
+    <script src="js/libs/bootstrap.min.js"></script>
+    <script src="js/libs/axios.min.js"></script>
+    <script src="js/utils/include.js"></script>
+
+    <title>Viewing a shopping list</title>
+</head>
+
+<body>
+    <div id="page-header"></div>
+
+    <div class="container">
+        <div class="row" id="errors"></div>
+
+        <div class="row">
+            <div class="col-md text-center">
+                <h3>Shopping list</h3>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Add a new item</h2>
+
+        <form id="item-form">
+            <div id = "hidden-params"></div>
+            
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="name">New Item:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Item name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md text-center">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="card-body">
+            <h4>I need:</h4>
+            <div id="shoppingList"></div>
+        </div>
+
+        <div class="card-body">
+            <h4>I've purchased:</h4>
+            <div id="removedList"></div>
+          </div>
+    </div>
+
+    <div id="page-footer"></div>
+
+    <script>
+        include("header.html", "#page-header");
+        include("footer.html", "#page-footer");
+    </script>
+
+    <script type="module" src="js/header.js"></script>
+    <script type="module" src="js/display_shopping_list.js"></script>
+</body>
+</html>
