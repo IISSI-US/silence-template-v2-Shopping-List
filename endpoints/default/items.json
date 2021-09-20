@@ -1,0 +1,64 @@
+{
+    "getAll": {
+        "route": "/items",
+        "method": "GET",
+        "sql": "SELECT * FROM items",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "Gets all items"
+    },
+    "getById": {
+        "route": "/items/$itemId",
+        "method": "GET",
+        "sql": "SELECT * FROM items WHERE itemId = $itemId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "Gets a items with corresponding primary key"
+    },
+    "create": {
+        "route": "/items",
+        "method": "POST",
+        "sql": "INSERT INTO items(name, quantity, purchased, listId) VALUES ($name, $quantity, $purchased, $listId)",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "creates a new items",
+        "request_body_params": [
+            "name",
+            "quantity",
+            "purchased",
+            "listId"
+        ]
+    },
+    "update": {
+        "route": "/items/$itemId",
+        "method": "PUT",
+        "sql": "UPDATE items SET name = $name, quantity = $quantity, purchased = $purchased, listId = $listId WHERE itemId = $itemId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "updates an existing items with corresponding primary key",
+        "request_body_params": [
+            "name",
+            "quantity",
+            "purchased",
+            "listId"
+        ]
+    },
+    "delete": {
+        "route": "/items/$itemId",
+        "method": "DELETE",
+        "sql": "DELETE FROM items WHERE itemId = $itemId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "deletes an existing items with corresponding primary key"
+    }
+}

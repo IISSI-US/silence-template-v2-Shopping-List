@@ -1,0 +1,64 @@
+{
+    "getAll": {
+        "route": "/users",
+        "method": "GET",
+        "sql": "SELECT * FROM users",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "Gets all users"
+    },
+    "getById": {
+        "route": "/users/$userId",
+        "method": "GET",
+        "sql": "SELECT * FROM users WHERE userId = $userId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "Gets a users with corresponding primary key"
+    },
+    "create": {
+        "route": "/users",
+        "method": "POST",
+        "sql": "INSERT INTO users(username, password, name, surnames) VALUES ($username, $password, $name, $surnames)",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "creates a new users",
+        "request_body_params": [
+            "username",
+            "password",
+            "name",
+            "surnames"
+        ]
+    },
+    "update": {
+        "route": "/users/$userId",
+        "method": "PUT",
+        "sql": "UPDATE users SET username = $username, password = $password, name = $name, surnames = $surnames WHERE userId = $userId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "updates an existing users with corresponding primary key",
+        "request_body_params": [
+            "username",
+            "password",
+            "name",
+            "surnames"
+        ]
+    },
+    "delete": {
+        "route": "/users/$userId",
+        "method": "DELETE",
+        "sql": "DELETE FROM users WHERE userId = $userId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "deletes an existing users with corresponding primary key"
+    }
+}

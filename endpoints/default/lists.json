@@ -1,0 +1,60 @@
+{
+    "getAll": {
+        "route": "/lists",
+        "method": "GET",
+        "sql": "SELECT * FROM lists",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "Gets all lists"
+    },
+    "getById": {
+        "route": "/lists/$listId",
+        "method": "GET",
+        "sql": "SELECT * FROM lists WHERE listId = $listId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "Gets a lists with corresponding primary key"
+    },
+    "create": {
+        "route": "/lists",
+        "method": "POST",
+        "sql": "INSERT INTO lists(name, userId) VALUES ($name, $userId)",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "creates a new lists",
+        "request_body_params": [
+            "name",
+            "userId"
+        ]
+    },
+    "update": {
+        "route": "/lists/$listId",
+        "method": "PUT",
+        "sql": "UPDATE lists SET name = $name, userId = $userId WHERE listId = $listId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "updates an existing lists with corresponding primary key",
+        "request_body_params": [
+            "name",
+            "userId"
+        ]
+    },
+    "delete": {
+        "route": "/lists/$listId",
+        "method": "DELETE",
+        "sql": "DELETE FROM lists WHERE listId = $listId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ],
+        "description": "deletes an existing lists with corresponding primary key"
+    }
+}
