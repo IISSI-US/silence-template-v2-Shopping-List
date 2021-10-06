@@ -2,7 +2,9 @@
 
 import { parseHTML } from '../utils/parseHTML.js';
 import { itemsAPI } from '../api/items.js';
-import { itemsAPI_auto } from '../api/items_auto.js';
+import { itemsAPI_auto } from '../api/_items.js';
+import { purchaseUtils } from '../utils/purchaseUtils.js'
+
 
 
 const itemRenderer = {
@@ -16,12 +18,12 @@ const itemRenderer = {
         return badge;
     },
 
-    // Converts several departments into a group of badges
+    // Converts several items into a group of badges
     asBadgeGroup: function (items) {
         let html = `<div class="item-group"></div>`;
         let group = parseHTML(html);
 
-        // Load the departments
+        // Load the items
         for (let item of items) {
             let badge = this.asBadge(item);
             group.appendChild(badge);
@@ -71,27 +73,23 @@ const itemRenderer = {
 };
 
 // Function to run when we indicate that an item has been purchased.
-function setPurchased(itemId){
-    // Another approach to this is to call the getByLists(Un)Purchased functions
-    // but this is done upon loading the page so we do just that. 
-    itemsAPI.purchase(itemId)
-    .then(_ => location.reload())
+async function setPurchased(itemId){
+    await itemsAPI.purchase(itemId)
+    purchaseUtils.loadUnpurchased();
+    purchaseUtils.loadPurchased();
 };
 
 // To run when we want to decrease the number for an item.
-function decrease(itemId){
-    // A better way to implement this would be to chage the html within the function 
-    // to reflect the change being made in the database without actually polling it again.
-    itemsAPI.decreaseQuantity(itemId)
-    .then(_ => location.reload())
+async function decrease(itemId){
+    await itemsAPI.decreaseQuantity(itemId)
+    purchaseUtils.loadUnpurchased();
+    
 };
 
 // To run when we want to increase the number for an item.
-function increase(itemId){
-    // A better way to implement this would be to chage the html within the function 
-    //to reflect the change being made in the database without actually polling it again.
-    itemsAPI.increaseQuantity(itemId)
-    .then(_ => location.reload())
+async function increase(itemId){
+    await itemsAPI.increaseQuantity(itemId)
+    purchaseUtils.loadUnpurchased();
 };
 
 export { itemRenderer };

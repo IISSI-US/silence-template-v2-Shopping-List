@@ -4,13 +4,9 @@ import { BASE_URL, requestOptions } from './common.js';
 
 const authAPI = {
 
-    login: function (formData) {
-        return new Promise(function (resolve, reject) {
-            axios
-                .post(`${BASE_URL}/login`, formData, requestOptions)
-                .then(response => resolve(response.data))
-                .catch(error => reject(error.response.data.message));
-        });
+    login: async function (formData) {
+        let response = await axios.post(`${BASE_URL}/login`, formData, requestOptions);
+        return response.data;
     },
 
 };

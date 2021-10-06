@@ -32,14 +32,14 @@ function handleSubmitLogin(event) {
     sendLogin(formData);
 }
 
-function sendLogin(formData) {
-    authAPI.login(formData)
-        .then(loginData => {
-            // Successful login
-            let sessionToken = loginData.sessionToken;
-            let loggedUser = loginData.user;
-            sessionManager.login(sessionToken, loggedUser);
-            window.location.href = "index.html";
-        })
-        .catch(error => messageRenderer.showErrorAsAlert(error));
+async function sendLogin(formData) {
+    try{
+        let loginData = await authAPI.login(formData)
+        let sessionToken = loginData.sessionToken;
+        let loggedUser = loginData.user;
+        sessionManager.login(sessionToken, loggedUser);
+        window.location.href = "index.html";
+    }catch(e){
+        messageRenderer.showErrorAsAlert("Error login in", e)
+    }
 }

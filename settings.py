@@ -3,7 +3,7 @@
 ###############################################################################
 
 # Shows debug messages while Silence is running
-DEBUG_ENABLED = True
+DEBUG_ENABLED = False
 
 # Database connection details
 DB_CONN = {

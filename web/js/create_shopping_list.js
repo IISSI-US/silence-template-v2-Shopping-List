@@ -1,7 +1,7 @@
 "use strict";
 
 import { listsAPI } from '/js/api/lists.js';
-import { listsAPI_auto } from '/js/api/lists_auto.js';
+import { listsAPI_auto } from '/js/api/_lists.js';
 
 import { listValidator } from '/js/validators/lists.js';
 import { messageRenderer } from '/js/renderers/messages.js';
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-function handleSendList(event) {
+async function handleSendList(event) {
     // Prevent the browser from sending the form on its own,
     // because we'll do it using AJAX
     event.preventDefault();
@@ -36,9 +36,12 @@ function handleSendList(event) {
     
     if (errors.length === 0) {
         // No errors, create the department
-        listsAPI_auto.create(formData)
-            .then(_ => window.location.href = "index.html")
-            .catch(error => messageRenderer.showErrorAsAlert(error));
+        try{
+            await listsAPI_auto.create(formData);
+        }catch(e){
+            messageRenderer.showErrorAsAlert("Error creating the shopping list.", error);
+        }
+        window.location.href = "index.html";
     } else {
         // Errors, display them
         for (let err of errors) {

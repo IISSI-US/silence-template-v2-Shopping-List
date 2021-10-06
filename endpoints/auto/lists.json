@@ -17,7 +17,7 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "Gets a lists with corresponding primary key"
+        "description": "Gets an entry from 'lists' by its primary key"
     },
     "create": {
         "route": "/lists",
@@ -27,7 +27,7 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "creates a new lists",
+        "description": "Creates a new entry in 'lists'",
         "request_body_params": [
             "name",
             "userId"
@@ -41,7 +41,7 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "updates an existing lists with corresponding primary key",
+        "description": "Updates an existing entry in 'lists' by its primary key",
         "request_body_params": [
             "name",
             "userId"
@@ -55,6 +55,6 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "deletes an existing lists with corresponding primary key"
+        "description": "Deletes an existing entry in 'lists' by its primary key"
     }
 }

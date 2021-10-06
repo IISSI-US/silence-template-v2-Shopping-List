@@ -2,10 +2,10 @@
 
 import { sessionManager } from './utils/session.js';
 
-import { usersAPI_auto } from '/js/api/users_auto.js';
+import { usersAPI_auto } from '/js/api/_users.js';
 
 import { listsAPI } from '/js/api/lists.js';
-import { listsAPI_auto } from '/js/api/lists_auto.js';
+import { listsAPI_auto } from '/js/api/_lists.js';
 
 import { userRenderer } from '/js/renderers/users.js';
 import { listRenderer } from '/js/renderers/lists.js';
@@ -17,25 +17,16 @@ const listsContainer = document.getElementById("lists");
 const newListBtn = document.getElementById("new-list-button");
 
 // Main function that will run when the page is ready
-function main() {
+async function main() {
     // Hide the options that shouldn't be available for not logged users
     setLoggedOptions();
 
     // Load the users
-    usersAPI_auto.getAll()
-        .then(users => {
-            let table = userRenderer.asTable(users);
-            usersContainer.appendChild(table);
-        })
-        .catch(error => messageRenderer.showErrorAsAlert(error));
+    loadUsers();
     
     // Load the lists
-    listsAPI_auto.getAll()
-        .then(lists => {
-            let table = listRenderer.asTable(lists);
-            listsContainer.appendChild(table);
-        })
-        .catch(error => messageRenderer.showErrorAsAlert(error));
+    loadLists();
+    
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -43,6 +34,26 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 ///////////
+
+async function loadUsers(){
+    try{
+        let users = await usersAPI_auto.getAll();
+        let table = userRenderer.asTable(users);
+        usersContainer.appendChild(table);
+    }catch(e){
+        messageRenderer.showErrorAsAlert("error retrieving the users", error);
+    }
+}
+
+async function loadLists(){
+    try{
+        let lists = await listsAPI_auto.getAll();
+        let table = listRenderer.asTable(lists);
+        listsContainer.appendChild(table);
+    }catch(e){
+        messageRenderer.showErrorAsAlert("error loading lists.", error);
+    }
+}
 
 function setLoggedOptions() {
     // Hide the things that shouldnt be available for non authenticated users

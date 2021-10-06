@@ -2,7 +2,7 @@
 
 import { parseHTML } from '../utils/parseHTML.js';
 import { listsAPI } from '../api/lists.js';
-import { listsAPI_auto } from '../api/lists_auto.js';
+import { listsAPI_auto } from '../api/_lists.js';
 
 const userRenderer = {
 

@@ -17,7 +17,7 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "Gets a users with corresponding primary key"
+        "description": "Gets an entry from 'users' by its primary key"
     },
     "create": {
         "route": "/users",
@@ -27,7 +27,7 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "creates a new users",
+        "description": "Creates a new entry in 'users'",
         "request_body_params": [
             "username",
             "password",
@@ -43,7 +43,7 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "updates an existing users with corresponding primary key",
+        "description": "Updates an existing entry in 'users' by its primary key",
         "request_body_params": [
             "username",
             "password",
@@ -59,6 +59,6 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "deletes an existing users with corresponding primary key"
+        "description": "Deletes an existing entry in 'users' by its primary key"
     }
 }

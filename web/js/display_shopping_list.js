@@ -1,17 +1,15 @@
 "use strict";
 
-import { itemsAPI } from '/js/api/items.js';
-import { itemsAPI_auto } from '/js/api/items_auto.js';
+import { itemsAPI_auto } from '/js/api/_items.js';
 import { messageRenderer } from '/js/renderers/messages.js';
-import { itemRenderer } from '/js/renderers/items.js';
 import { itemValidator } from '/js/validators/items.js';
 import { parseHTML } from '/js/utils/parseHTML.js';
+import { purchaseUtils } from '/js/utils/purchaseUtils.js'
 
 // DOM elements that we will use
 const errorsDiv = document.getElementById("errors");
 const itemForm = document.getElementById("item-form");
-const shoppingList = document.getElementById("shoppingList");
-const removedList = document.getElementById("removedList");
+
 
 // Main function that will run when the page is ready
 function main() {
@@ -21,22 +19,10 @@ function main() {
     addHiddenToForm(list_id)
 
     // Load the unpurchased List
-    itemsAPI.getByListUnpurchased(list_id)
-    .then(items => {
-        console.log(items)
-        let list = itemRenderer.asList(items, true);
-        shoppingList.appendChild(list);
-    })
-    .catch(error => messageRenderer.showErrorAsAlert(error));
+    purchaseUtils.loadUnpurchased(list_id);
 
     // Load the purchased List
-    itemsAPI.getByListPurchased(list_id)
-    .then(items => {
-        console.log(items)
-        let list = itemRenderer.asList(items, false);
-        removedList.appendChild(list);
-    })
-    .catch(error => messageRenderer.showErrorAsAlert(error));
+    purchaseUtils.loadPurchased(list_id);
 
     // Handle the form's submit event
     itemForm.addEventListener("submit", function (event) {
@@ -51,6 +37,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 ///////////////////////////////////////////////////////////////////////////////
+
+// async function loadUnpurchased(list_id){
+//     try{
+//         let items = await itemsAPI.getByListUnpurchased(list_id)
+//         let list = itemRenderer.asList(items, true);
+//         shoppingList.appendChild(list);
+//     }catch(e){
+//         messageRenderer.showErrorAsAlert("error loading unpurchased list.", error)
+//     }
+// }
+
+// async function loadPurchased(list_id){
+//     try{
+//         let items = await itemsAPI.getByListPurchased(list_id)
+//         let list = itemRenderer.asList(items, false);
+//         removedList.appendChild(list);
+//     }catch(e){
+//         messageRenderer.showErrorAsAlert("error loading purchased list.", error)
+//     }
+// }
+
 
 // Function that returns the requested get parameter value in the url.
 function getQueryParam(param){
@@ -73,21 +80,25 @@ function addHiddenToForm(list_id){
     document.getElementById("hidden-params").appendChild(child3);
 };
 
-function handleSendList(event) {
+async function handleSendList(event) {
     // Prevent the browser from sending the form on its own,
     // because we'll do it using AJAX
     event.preventDefault();
     errorsDiv.innerHTML = "";
     let formData = new FormData(itemForm);
+    let list_id = getQueryParam("list_id");
     
-    //TODO: add validation to items
     let errors = itemValidator.validateItem(formData);
 
     if (errors.length === 0) {
         // No errors, create the department
-        itemsAPI_auto.create(formData)
-            .then(_ => location.reload())
-            .catch(error => messageRenderer.showErrorAsAlert(error));
+        try{
+            await itemsAPI_auto.create(formData)
+            // loadPurchased(list_id);
+            purchaseUtils.loadUnpurchased(list_id);
+        }catch(e){
+            messageRenderer.showErrorAsAlert("error creating item.", e)
+        }
     } else {
         // Errors, display them
         for (let err of errors) {

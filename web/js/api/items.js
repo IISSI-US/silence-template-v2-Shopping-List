@@ -3,51 +3,34 @@
 import { BASE_URL, requestOptions } from './common.js';
 
 const itemsAPI = {
-    getByListPurchased: function (ListId){
-        return new Promise(function (resolve, reject) {
-            axios
-                .get(`${BASE_URL}/lists/${ListId}/items/purchased`, requestOptions)
-                .then(response => resolve(response.data))
-                .catch(error => reject(error.response.data.message));
-        });
+    getByListPurchased: async function (ListId){
+        let response = await axios.get(`${BASE_URL}/lists/${ListId}/items/purchased`,requestOptions);
+        return response.data;
     },
 
-    getByListUnpurchased: function (ListId){
-        return new Promise(function (resolve, reject) {
-            axios
-                .get(`${BASE_URL}/lists/${ListId}/items/unpurchased`, requestOptions)
-                .then(response => resolve(response.data))
-                .catch(error => reject(error.response.data.message));
-        });
+    getByListUnpurchased: async function (ListId){
+        let response = await axios.get(`${BASE_URL}/lists/${ListId}/items/unpurchased`,requestOptions);
+        return response.data;
     },
 
-    // this makes a database call each time you increse or dicrease the quantity of items to buy
-    // this is obviously suboptimal, the corect thing to do would be update with the new ammount and set it
-    increaseQuantity: function (ItemId){
-        return new Promise(function (resolve, reject) {
-            axios
-                .put(`${BASE_URL}/items/${ItemId}/increase`, requestOptions)
-                .then(response => resolve(response.data[0]))
-                .catch(error => reject(error.response.data.message));
-        });
+    // this makes a database call each time you increse 
+    // or decrease the quantity of items to buy
+    // this is obviously suboptimal, 
+    // the corect thing to do would be update with the new ammount and set it
+    // but for the purposes of this template this will suffice.
+    increaseQuantity: async function (ItemId){
+        let response = await axios.put(`${BASE_URL}/items/${ItemId}/increase`,requestOptions);
+        return response.data[0];
     },
 
-    decreaseQuantity: function (ItemId){
-        return new Promise(function (resolve, reject) {
-            axios
-                .put(`${BASE_URL}/items/${ItemId}/decrease`, requestOptions)
-                .then(response => resolve(response.data[0]))
-                .catch(error => reject(error.response.data.message));
-        });
+    decreaseQuantity: async function (ItemId){
+        let response = await axios.put(`${BASE_URL}/items/${ItemId}/decrease`,requestOptions);
+        return response.data[0];
     },
 
-    purchase: function (ItemId){
-        return new Promise(function (resolve, reject) {
-            axios
-                .put(`${BASE_URL}/items/${ItemId}/purchase`, requestOptions)
-                .then(response => resolve(response.data[0]))
-                .catch(error => reject(error.response.data.message));
-        });
+    purchase: async function (ItemId){
+        let response = await axios.put(`${BASE_URL}/items/${ItemId}/purchase`,requestOptions);
+        return response.data[0];
     },
 };
 

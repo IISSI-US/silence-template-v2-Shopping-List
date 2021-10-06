@@ -17,7 +17,7 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "Gets a items with corresponding primary key"
+        "description": "Gets an entry from 'items' by its primary key"
     },
     "create": {
         "route": "/items",
@@ -27,7 +27,7 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "creates a new items",
+        "description": "Creates a new entry in 'items'",
         "request_body_params": [
             "name",
             "quantity",
@@ -43,7 +43,7 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "updates an existing items with corresponding primary key",
+        "description": "Updates an existing entry in 'items' by its primary key",
         "request_body_params": [
             "name",
             "quantity",
@@ -59,6 +59,6 @@
         "allowed_roles": [
             "*"
         ],
-        "description": "deletes an existing items with corresponding primary key"
+        "description": "Deletes an existing entry in 'items' by its primary key"
     }
 }
