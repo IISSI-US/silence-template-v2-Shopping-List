@@ -2,7 +2,7 @@
     "getByUser":{
       "route": "/lists/user/$userId",
       "method":"GET",
-      "sql":"SELECT * FROM Lists WHERE userId = $userId",
+      "sql":"SELECT * FROM lists WHERE userId = $userId",
       "description":"Retrieves the lists belonging to the specified user.",
       "auth_required":true
     }

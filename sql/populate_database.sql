@@ -1,7 +1,7 @@
-INSERT INTO Users (userId, username, password, name, surnames)
+INSERT INTO Users (userId, username, password, name, surnames, role)
     VALUES
-	(1, 'labetica31','pbkdf2:sha256:150000$lr3IDhwA$39ca15dd006093fcb9dbc1755ceb5e9d2db7f2fbaf65243e1389259b46ec3245', 'Blanca', 'Gonzalez Daria'),
-	(2, 'sevillano78','pbkdf2:sha256:150000$UEnnhg0e$07d97fff772639f8b8c42a7d768ef66ca7380bcaba90a899ca435e00dff44818', 'Marco', 'Gracian Sainz');
+	(1, 'labetica31','pbkdf2:sha256:150000$lr3IDhwA$39ca15dd006093fcb9dbc1755ceb5e9d2db7f2fbaf65243e1389259b46ec3245', 'Blanca', 'Gonzalez Daria', NULL),
+	(2, 'sevillano78','pbkdf2:sha256:150000$UEnnhg0e$07d97fff772639f8b8c42a7d768ef66ca7380bcaba90a899ca435e00dff44818', 'Marco', 'Gracian Sainz', 'super');
 -- The passwords are the same as the username
 
 INSERT INTO Lists (listId, name, userId)

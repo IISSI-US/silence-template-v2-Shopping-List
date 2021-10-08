@@ -53,7 +53,7 @@
         "sql": "DELETE FROM lists WHERE listId = $listId",
         "auth_required": true,
         "allowed_roles": [
-            "*"
+            "super"
         ],
         "description": "Deletes an existing entry in 'lists' by its primary key"
     }

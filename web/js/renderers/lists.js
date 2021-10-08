@@ -10,6 +10,7 @@ const listRenderer = {
                         <td>${list.listId}</td>
                         <td>${list.name}</td>
                         <td><a href="display_shopping_list.html?list_id=${list.listId}">Show<a></td>
+                        <td><button id="${list.listId}" class="delete btn btn-danger">X</button><td>
                     </tr></table>`;
         let row = parseHTML(html).querySelector("tr");
         return row;
@@ -23,6 +24,7 @@ const listRenderer = {
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Link</th>
+                                <th scope="col">Options</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

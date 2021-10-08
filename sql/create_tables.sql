@@ -7,7 +7,8 @@ CREATE TABLE Users (
   username VARCHAR(256) UNIQUE NOT NULL,
   password VARCHAR(512) NOT NULL,
   name VARCHAR(256) NOT NULL,
-  surnames VARCHAR(256) NOT NULL
+  surnames VARCHAR(256) NOT NULL,
+  role VARCHAR(256)
 );
 
 CREATE TABLE Lists(

@@ -32,8 +32,9 @@ USER_AUTH_DATA = {
     "table": "Users",
     "identifier": "username",
     "password": "password",
+    "role":"role",
 }
 
 # A random string that is used for security purposes
 # (this has been generated automatically upon project creation)
-SECRET_KEY = "xhvXHN_SnkIq0ovpB6sK5exsevzsQ1NK3PfSYgvsIcI"
+SECRET_KEY = "ehmK9pI3lT5OF8h0Uz3bvUUCs4JtGLOm_CQ38pcHEGg"

@@ -41,7 +41,7 @@ async function loadUsers(){
         let table = userRenderer.asTable(users);
         usersContainer.appendChild(table);
     }catch(e){
-        messageRenderer.showErrorAsAlert("error retrieving the users", error);
+        messageRenderer.showErrorAsAlert("error retrieving the users", e);
     }
 }
 
@@ -50,8 +50,25 @@ async function loadLists(){
         let lists = await listsAPI_auto.getAll();
         let table = listRenderer.asTable(lists);
         listsContainer.appendChild(table);
+        asignDelete();
     }catch(e){
-        messageRenderer.showErrorAsAlert("error loading lists.", error);
+        messageRenderer.showErrorAsAlert("error loading lists.", e);
+    }
+}
+
+async function asignDelete(){
+    let deleteButtons = document.getElementsByClassName("delete");
+    
+    for (const e of deleteButtons) {
+        let listId = e.getAttribute("id");
+        e.addEventListener("click", async function(){
+            try{
+                await listsAPI_auto.delete(listId);
+                loadLists();
+            }catch(e){
+                messageRenderer.showErrorAsAlert("error deleting the list", e);
+            }
+        });
     }
 }
 
