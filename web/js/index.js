@@ -49,6 +49,7 @@ async function loadLists(){
     try{
         let lists = await listsAPI_auto.getAll();
         let table = listRenderer.asTable(lists);
+        listsContainer.innerHTML = ""
         listsContainer.appendChild(table);
         asignDelete();
     }catch(e){
@@ -63,7 +64,7 @@ async function asignDelete(){
         let listId = e.getAttribute("id");
         e.addEventListener("click", async function(){
             try{
-                await listsAPI_auto.delete(listId);
+                await listsAPI.delete(listId);
                 loadLists();
             }catch(e){
                 messageRenderer.showErrorAsAlert("error deleting the list", e);

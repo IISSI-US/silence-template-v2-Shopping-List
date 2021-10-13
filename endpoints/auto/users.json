@@ -22,7 +22,7 @@
     "create": {
         "route": "/users",
         "method": "POST",
-        "sql": "INSERT INTO users(username, password, name, surnames) VALUES ($username, $password, $name, $surnames)",
+        "sql": "INSERT INTO users(username, password, name, surnames, role) VALUES ($username, $password, $name, $surnames, $role)",
         "auth_required": true,
         "allowed_roles": [
             "*"
@@ -32,13 +32,14 @@
             "username",
             "password",
             "name",
-            "surnames"
+            "surnames",
+            "role"
         ]
     },
     "update": {
         "route": "/users/$userId",
         "method": "PUT",
-        "sql": "UPDATE users SET username = $username, password = $password, name = $name, surnames = $surnames WHERE userId = $userId",
+        "sql": "UPDATE users SET username = $username, password = $password, name = $name, surnames = $surnames, role = $role WHERE userId = $userId",
         "auth_required": true,
         "allowed_roles": [
             "*"
@@ -48,7 +49,8 @@
             "username",
             "password",
             "name",
-            "surnames"
+            "surnames",
+            "role"
         ]
     },
     "delete": {

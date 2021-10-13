@@ -5,5 +5,16 @@
       "sql":"SELECT * FROM lists WHERE userId = $userId",
       "description":"Retrieves the lists belonging to the specified user.",
       "auth_required":true
-    }
+    },
+    
+    "deleteAuth": {
+      "route": "/lists/authdel/$listId",
+      "method": "DELETE",
+      "sql": "DELETE FROM lists WHERE listId = $listId",
+      "auth_required": true,
+      "allowed_roles": [
+          "super"
+      ],
+      "description": "Deletes an existing entry in 'lists' by its primary key"
+  }
 } 
